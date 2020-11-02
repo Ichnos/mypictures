@@ -43,7 +43,7 @@ class PicturesTest < ActionDispatch::IntegrationTest
       follow_redirect!
       assert_match name_of_picture.capitalize, response.body
       assert_match description_of_picture, response.body
-    end
+   end
   
     
   test "reject invalid picture submissions" do
