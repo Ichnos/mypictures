@@ -1,9 +1,10 @@
-<%= render 'shared/page_title', title: "My pictures" %>
+<%= render 'shared/page_title', title: "My Pictures" %>
 <% @pictures.each do |picture| %>
   <div class="row">
     <div class="col-md-2">
-      <section class="center">
-        
+      <section class="user_info center">
+    
+        <%= gravatar_for(picture.user, size: 100) %>
       </section>
     </div>
     <div class="col-md-8 well">
@@ -11,8 +12,10 @@
       <p><%= truncate(picture.description, length: 150) %></p>
       <p>
         <span class="quiet"><small>Created 
-        <%= time_ago_in_words(picture.created_at) %> ago</small></span>
+            <%= time_ago_in_words(picture.created_at) %> 
+           ago</small></span>
       </p> 
     </div>
   </div>
 <% end %>
+
