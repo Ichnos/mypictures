@@ -2,7 +2,7 @@ require 'test_helper'
 class PictureTest < ActiveSupport::TestCase
   
   def setup
-  @picture = Picture.new(name: "Vecchio con barba", description: "Bel ritratto di un vecchio pastore")  
+    @picture = Picture.new(name: "Vecchio con barba", description: "Bel ritratto di un vecchio pastore")  
   end
   
   test "picture should be valid" do
