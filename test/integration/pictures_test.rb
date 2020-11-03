@@ -30,7 +30,11 @@ class PicturesTest < ActionDispatch::IntegrationTest
     assert_match @picture.name, response.body
     assert_match @picture.description, response.body
     assert_match @user.username, response.body
+    assert_select 'a[href=?]', edit_picture_path(@picture), text: "Edit this picture"
+    assert_select 'a[href=?]', picture_path(@picture), text: "Delete this picture"
+    assert_select 'a[href=?]', pictures_path, text: "Return to Pictures listing"
   end
+
   
   test "create new valid recipe" do
     get new_recipe_path
