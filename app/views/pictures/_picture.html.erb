@@ -1,0 +1,19 @@
+<% obj.each do |picture| %>
+  <div class="row">
+    <div class="col-md-2">
+      <section class="user_info center">
+    
+        <%= gravatar_for(picture.user, size: 100) %>
+      </section>
+    </div>
+    <div class="col-md-8 well">
+      <h4><%= link_to picture.name, picture_path(picture) %></h4>
+      <p><%= truncate(picture.description, length: 120) %></p>
+      <p>
+        <span class="quiet"><small>Created 
+            <%= time_ago_in_words(picture.created_at) %> 
+           ago</small></span>
+      </p> 
+    </div>
+  </div>
+<% end %>

@@ -3,7 +3,7 @@ require 'test_helper'
 class PicturesEditTest < ActionDispatch::IntegrationTest
   
   def setup
-    @user = User.create!(username: "ichnos", email: "ichnos@example.com")
+    @user = User.new(username: "Ichnos", email: "ichnos@example.com", password: "password", password_confirmation: "password")
     @picture = Picture.create(name: "vegetable saute", description: "great vegetable sautee, add vegetable and oil", user: @user)
   end
   test "reject invalid picture update" do

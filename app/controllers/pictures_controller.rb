@@ -3,15 +3,26 @@ class PicturesController < ApplicationController
   
   def index
     @pictures = Picture.all
-  end
-  
-  def new  
-    @picture = Picture.new
-  end
+  end 
   
   def show
     
   end
+  
+  def new
+    @picture = Picture.new
+  end
+  
+  def create
+    @picture = Picture.new(picture_params)
+    @picture.user = User.first
+    if @picture.save
+      flash[:success] = "Picture was created successfully!"
+      redirect_to picture_path(@picture)
+    else
+      render 'new'
+    end
+  end  
   
   def edit
     
@@ -24,19 +35,7 @@ class PicturesController < ApplicationController
     else
       render 'edit'
     end
-
-  end  
-
-  def create
-    @picture = Picture.new(picture_params)
-    @picture.user = User.first
-    if @picture.save
-      flash[:success] = "Picture was created successfully!"
-      redirect_to picture_path(@picture)
-    else
-      render 'new'
-    end
-  end
+  end 
   
   def destroy
     Picture.find(params[:id]).destroy

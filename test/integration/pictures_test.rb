@@ -3,12 +3,9 @@ require 'test_helper'
 class PicturesTest < ActionDispatch::IntegrationTest
   
   def setup
-    @user = User.create!(username: "ichnos", email: "ichnos@example.com")
-    @picture = Picture.create(name: "vegetable saute", 
-                                                        description: "great vegetable sautee, 
-                                                       add vegetable and oil", user: @user)
-    @picture2 = @user.pictures.build(name: "chicken saute", 
-                                                       description: "great chicken dish")
+    @user = User.create!(username: "Ichnos", email: "ichnos@example.com", password: "password", password_confirmation: "password")
+    @picture = Picture.create(name: "vegetable saute", description: "great vegetable sautee, add vegetable and oil", user: @user)
+    @picture2 = @user.pictures.build(name: "chicken saute", description: "great chicken dish")
     @picture2.save
   end
   
@@ -20,7 +17,7 @@ class PicturesTest < ActionDispatch::IntegrationTest
   test "should get pictures listing" do
     get pictures_path
     assert_template 'pictures/index'
-    assert_select "a[href=?]", picture_path(@picture), text: @recipe.name
+    assert_select "a[href=?]", picture_path(@picture), text: @picture.name
     assert_select "a[href=?]", picture_path(@picture2), text: @picture2.name
   end
   
@@ -34,23 +31,18 @@ class PicturesTest < ActionDispatch::IntegrationTest
     assert_select 'a[href=?]', picture_path(@picture), text: "Delete this picture"
     assert_select 'a[href=?]', pictures_path, text: "Return to Pictures listing"
   end
-
   
-  test "create new valid recipe" do
-    get new_recipe_path
-    assert_template 'recipes/new'
-    name_of_recipe = "chicken saute"
-    description_of_recipe = "add chicken, add vegetables, 
-  
-                       cook for 20 minutes, serve delicious meal"
-    assert_difference 'Recipe.count', 1 do
-      post recipes_path, params: { recipe: { name: name_of_recipe, 
-  
-                                                     description: description_of_recipe}}
+  test "create new valid picture" do
+    get new_picture_path
+    assert_template 'pictures/new'
+    name_of_picture = "chicken saute"
+    description_of_picture = "add chicken, add vegetables, cook for 20 minutes, serve delicious meal"
+    assert_difference 'Picture.count', 1 do
+      post pictures_path, params: { picture: { name: name_of_picture, description: description_of_picture}}
     end
     follow_redirect!
-    assert_match name_of_recipe.capitalize, response.body
-    assert_match description_of_recipe, response.body
+    assert_match name_of_picture.capitalize, response.body
+    assert_match description_of_picture, response.body
   end
   
     
@@ -66,3 +58,7 @@ class PicturesTest < ActionDispatch::IntegrationTest
   end
 
 end
+
+  
+  
+  

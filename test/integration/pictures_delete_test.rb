@@ -2,9 +2,8 @@ require 'test_helper'
 
 class PicturesDeleteTest < ActionDispatch::IntegrationTest
   def setup
-    @user = User.create!(username: "ichnos", email: "ichnos@example.com")
-    @picture = Picture.create(name: "vegetable saute", 
-              description: "great vegetable sautee, add vegetable and oil", user: @user)
+    @user = User.create!(username: "Ichnos", email: "ichnos@example.com", password: "password", password_confirmation: "password")
+    @picture = Picture.create(name: "vegetable saute", description: "great vegetable sautee, add vegetable and oil", user: @user)
   end
   test "successfully delete a picture" do
     get picture_path(@picture)

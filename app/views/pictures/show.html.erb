@@ -1,4 +1,5 @@
 <%= render 'shared/page_title', title: @picture.name %>
+
 <div class="well col-md-8 col-md-offset-2">
   <h4 class="center description"><strong>Steps: </strong></h4>
   <hr />
@@ -9,7 +10,7 @@
       <em>Created by:</em>
     </p>
     <p class="center">
-      <%= link_to gravatar_for(@picture.user), pictures_path %>
+      <%= link_to gravatar_for(@picture.user), user_path(@picture.user) %>
     </p>
     <p class="center">
       <small><%= @picture.user.username.capitalize %></small>
