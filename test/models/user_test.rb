@@ -68,6 +68,15 @@ class UserTest < ActiveSupport::TestCase
     @user.password = @user.password_confirmation = "x" * 4
     assert_not @user.valid?
   end
+  
+  test "associated pictures should be destroyed" do
+    @user.save
+    @user.pictures.create!(name: "testing delete", description: "testing delete function")
+    assert_difference 'Picture.count', -1 do
+      @user.destroy
+    end
+  end
+
 
 
   

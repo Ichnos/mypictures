@@ -2,7 +2,7 @@ class PicturesController < ApplicationController
   before_action :set_picture, only: [:show, :edit, :update]
   
   def index
-    @pictures = Picture.all
+    @pictures = Picture.paginate(page: params[:page], per_page: 5)
   end 
   
   def show
@@ -15,10 +15,10 @@ class PicturesController < ApplicationController
   
   def create
     @picture = Picture.new(picture_params)
-    @picture.user = User.first
+    @rpicture.user = current_user
     if @picture.save
       flash[:success] = "Picture was created successfully!"
-      redirect_to picture_path(@picture)
+      redirect_to pictures_path(@picture)
     else
       render 'new'
     end

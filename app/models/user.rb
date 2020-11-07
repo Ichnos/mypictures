@@ -9,7 +9,7 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: { minimum: 5 }, allow_nil: true
                     
-  has_many :pictures
+  has_many :pictures, dependent: :destroy
   has_secure_password
     
 end
